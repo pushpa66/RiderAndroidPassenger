@@ -27,12 +27,14 @@
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyCOo1hQiLRXw2qoJWcp_o_fguzromGZX7I&sensor = true"></script>
   </head>
-  <body ng-app="starter">
+  <body ng-app="starter" ng-controller="MapController">
 
     <ion-pane>
       <ion-header-bar class="bar-stable">
