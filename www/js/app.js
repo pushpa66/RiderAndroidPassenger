@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var app = angular.module('starter', ['ionic', 'ngCordova'])
+var app = angular.module('starter', ['ionic', 'ngCordova']);
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -24,10 +24,9 @@ app.run(function($ionicPlatform) {
 });
 
 app.controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
+
   var options = {timeout: 10000, enableHighAccuracy: true};
-
-  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
-
+  function success(position) {
     var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
     var mapOptions = {
@@ -36,9 +35,42 @@ app.controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    $scope.map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  };
 
-  }, function(error){
-    console.log("Could not get location");
+  function error(err) {
+
+  };
+
+  //navigator.geolocation.getCurrentPosition(success, error, options);
+  $cordovaGeolocation.getCurrentPosition(options).then(function success(position) {
+    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+    var mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    $scope.map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+    google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+      var marker = new google.maps.Marker({
+        map: $scope.map,
+        animation: google.maps.Animation.DROP,
+        position: latLng
+      });
+
+      var infoWindow = new google.maps.InfoWindow({
+        content: "Here I am!"
+      });
+
+      google.maps.event.addListener(marker, 'click', function () {
+        infoWindow.open($scope.map, marker);
+      });
+    });
   });
+
+
+  //Wait until the map is loaded
+
 });
