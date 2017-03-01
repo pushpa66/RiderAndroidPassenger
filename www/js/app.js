@@ -23,20 +23,7 @@ app.run(function($ionicPlatform) {
   });
 });
 
-app.config(function($stateProvider, $urlRouterProvider) {
-
-  $stateProvider
-    .state('map', {
-      url: '/',
-      templateUrl: 'templates/map.html',
-      controller: 'MapController'
-    });
-
-  $urlRouterProvider.otherwise("/");
-
-});
-
-app.controller('MapController', function($scope, $state, $cordovaGeolocation) {
+app.controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
   var options = {timeout: 10000, enableHighAccuracy: true};
 
   $cordovaGeolocation.getCurrentPosition(options).then(function(position){

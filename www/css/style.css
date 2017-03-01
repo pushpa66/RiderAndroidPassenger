@@ -1,9 +1,6 @@
-/* Empty. Add your own CSS if you like */
-.scroll{
-  height: 100%;
-}
 
-#map{
-  width: 100%;
+#map-canvas {
   height: 100%;
+  margin: 0;
+  padding: 0;
 }

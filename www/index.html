@@ -31,17 +31,18 @@
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="js/map.js"></script>
     <script src="js/app.js"></script>
-    <script src="http://maps.google.com/maps/api/js?key=AIzaSyCOo1hQiLRXw2qoJWcp_o_fguzromGZX7I&sensor = true"></script>
   </head>
-  <body ng-app="starter" ng-controller="MapController">
+  <body ng-app="starter">
 
     <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
+      <ion-header-bar class="bar-assertive">
+        <h1 class="title">Google Map Example</h1>
       </ion-header-bar>
       <ion-content>
-      </ion-content>
+        <div id="map-canvas" data-tab-disabled="true"></div>
     </ion-pane>
   </body>
 </html>
